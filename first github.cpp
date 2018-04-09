@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<conio.h>
+#include<stdlib.h>
 //average time
 void Intro()
 {
@@ -28,6 +29,42 @@ void AvgTime(int process[], int n, int brust[],int quant)
     
     printf("\n Time he spend on handling query is : %d",avg_turnaround);
     printf("\n Average query time is : %d",avg_wait);
+    
+    void WaitingTime(int process[], int n,int brust[], int wt[], int quan)
+{
+    int i,t,rem[n];
+    t=0;
+    for (i = 0 ; i < n ; i++)
+        {
+            rem[i] =  brust[i];
+        }
+    while (1)
+    {
+        bool flag= true;
+        for (i = 0 ; i < n; i++)
+        {
+            if (rem[i] > 0)
+            {
+                flag = false; 
+ 
+                if (rem[i] > quan)
+                {
+                    t += quan;
+                    rem[i] -= quan;
+                }
+                else
+                {
+                    t = t + rem[i];
+                    wt[i] = t - brust[i];
+                    rem[i] = 0;
+                }
+            }
+        }
+        if (flag == true)
+          break;
+    }
+}
+
 }
 int main()
 {
